@@ -1,0 +1,7 @@
+= form_for 'upload' do |f|
+
+  .field
+    = f.label :csv, "Upload CSV"
+    = f.file_field :csv
+  .actions
+    = f.submit 'Save'

@@ -1,4 +1,7 @@
 Money::Application.routes.draw do
+  get "csv/import" => 'csv#upload'
+  post "csv/import" => 'csv#import'
+
   resources :bank_transactions
 
   # The priority is based upon order of creation:
