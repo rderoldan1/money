@@ -1,5 +1,5 @@
 Money::Application.routes.draw do
-  resources :banks
+  resources :bank_transactions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
