@@ -1,5 +1,6 @@
 Money::Application.routes.draw do
-  post "csv/import"
+  get "csv/import" => 'csv#upload'
+  post "csv/import" => 'csv#import'
 
   resources :bank_transactions
 
