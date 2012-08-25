@@ -10,5 +10,5 @@
 
 class Bank < ActiveRecord::Base
   attr_accessible :name
-  has_many :bank_transactions
+  has_many :transactions
 end

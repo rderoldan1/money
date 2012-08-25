@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: bank_transactions
+# Table name: transactions
 #
 #  id           :integer          not null, primary key
 #  date         :datetime
@@ -17,11 +17,11 @@ require 'spec_helper'
 require 'digest'
 require 'date'
 
-describe BankTransaction do
+describe Transaction do
 
   before do
     fingerprint = Digest::SHA1::hexdigest "a"
-    @t = BankTransaction.new( date: Time.now, description: 'Some', sha1_digest: fingerprint ) 
+    @t = Transaction.new( date: Time.now, description: 'Some', sha1_digest: fingerprint ) 
   end
 
   subject { @t }

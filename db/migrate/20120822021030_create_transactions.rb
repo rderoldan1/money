@@ -1,6 +1,6 @@
-class CreateBankTransactions < ActiveRecord::Migration
+class CreateTransactions < ActiveRecord::Migration
   def change
-    create_table :bank_transactions do |t|
+    create_table :transactions do |t|
       t.datetime :date
       t.string :check_number
       t.string :description
