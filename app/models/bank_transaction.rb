@@ -15,6 +15,7 @@
 
 class BankTransaction < ActiveRecord::Base
   attr_accessible :check_number, :credit, :date, :debit, :description, :sha1_digest
+  belongs_to :bank
 
   validates :date, :presence => true
   validates :description, :presence => true
