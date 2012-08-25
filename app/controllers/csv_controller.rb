@@ -20,7 +20,7 @@ class CsvController < ApplicationController
       out["credit"]       = row["Credit"]
       out["sha1_digest"]  = Digest::SHA1::hexdigest row.to_s
 
-      BankTransaction.create out
+      Transaction.create out
 
     end
 

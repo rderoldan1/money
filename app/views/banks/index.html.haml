@@ -1,0 +1,19 @@
+%h1 Listing banks
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @banks.each do |bank|
+    %tr
+      %td= bank.name
+      %td= link_to 'Show', bank
+      %td= link_to 'Edit', edit_bank_path(bank)
+      %td= link_to 'Destroy', bank, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Bank', new_bank_path

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: bank_transactions
+# Table name: transactions
 #
 #  id           :integer          not null, primary key
 #  date         :datetime
@@ -13,7 +13,7 @@
 #  updated_at   :datetime         not null
 #
 
-class BankTransaction < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
   attr_accessible :check_number, :credit, :date, :debit, :description, :sha1_digest
   belongs_to :bank
 
