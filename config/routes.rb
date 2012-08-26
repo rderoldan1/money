@@ -6,6 +6,7 @@ Money::Application.routes.draw do
   post "flow/edit"   => 'flow#update'
   get  "flow/:month" => 'flow#month'
   post "flow/:month" => 'flow#update'
+  get  "flow/:month/tithe" => 'flow#tithe'
 
   resources :banks
 

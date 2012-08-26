@@ -1,0 +1,32 @@
+%h1 Tithe
+
+%table
+  -@giving.each do |g|
+    %tr
+      %td= g.meta.descriptor
+      %td= number_to_currency g.amount
+      %td
+  -if @giving_total
+    %tr
+      %td
+      %td
+      %td= number_to_currency @giving_total
+  -if @giving
+    %tr.blank
+      %td
+      %td
+      %td
+  -@income.each do |i|
+    %tr
+      %td= i.meta.descriptor
+      %td= number_to_currency i.amount
+      %td
+  -if @income 
+    %tr
+      %td
+      %td
+      %td= number_to_currency @income_total
+  %tr
+    %td Total
+    %td 
+    %td= number_to_currency @tithe

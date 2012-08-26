@@ -34,4 +34,7 @@ Money::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # SQL log
+  config.log_level = :debug
 end
