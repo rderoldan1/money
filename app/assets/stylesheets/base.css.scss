@@ -1,14 +1,78 @@
+$openSans: 'Open Sans', arial;
 body {
-  font:normal 16px/1.5 'Open Sans', arial;
+  font:normal 16px/1.5 $openSans;
+  width:90%;
+  margin:0 auto;
 }
 
 table {
-  margin:1em;
+  box-sizing: border-box;
+  margin:0 auto;
   border:1px solid #eee;
+  width:100%;
+  border-spacing:0;
+  border-collapse: collapse;
+
+  th {
+    text-align:left;
+    border-bottom:1px solid #eee;
+    text-indent:.7em;
+  }
+
+  th, td {
+    padding:.75em 1em;
+  }
 
   td {
-    padding:.75em 1em;
     border-bottom:1px solid #eee;
+    vertical-align:top;
+
+    &:last-child {
+      border-left:1px solid #eee;
+    }
+  }
+
+  tr:nth-child(even) {
+
+    td {
+      background-color:#fafafa
+    }
+
+  }
+
+  textarea {
+    height:100%;
+  }
+
+  textarea ,
+  input[type="text"] {
+    @include border-radius(1em);
+    background-color:transparent;
+    border:none;
+    padding:.3em .7em;
+    outline:0;
+    font:normal 16px/1.5 $openSans;
+    width:95%;
+    @include transition(.1s linear all);
+
+    &:focus {
+      @include box-shadow(0 0 1em rgba(253,133,6,.2));
+      @include transition(.1s linear all);
+    }
+
   }
 
 }
+
+input[type="submit"] {
+  padding:.7em 1.4em;
+  color:white;
+  background-color: rgb(253,133,6);
+  border:none;
+  float:right;
+  text-transform:uppercase;
+  font-size:15px;
+  margin:2em 0;
+}
+
+

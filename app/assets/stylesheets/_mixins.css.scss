@@ -1,0 +1,144 @@
+$useIEFilters: 0; 
+
+@mixin background-size ($value) {
+  -webkit-background-size: $value;
+          background-size: $value;
+}
+
+@mixin border-image ($path, $offsets, $repeats) {
+     -moz-border-image: $path $offsets $repeats;
+       -o-border-image: $path $offsets $repeats;
+  -webkit-border-image: $path $offsets $repeats;
+          border-image: $path $offsets $repeats;
+}
+
+@mixin border-radius ($values) {
+     -moz-border-radius: $values;
+  -webkit-border-radius: $values;
+          border-radius: $values;
+             -moz-background-clip: padding; 
+          -webkit-background-clip: padding-box; 
+                  background-clip: padding-box;
+}
+
+@mixin box-shadow ($values) {
+     -moz-box-shadow: $values;
+  -webkit-box-shadow: $values;
+          box-shadow: $values;
+  
+    }
+
+@mixin box-sizing($value) {
+     -moz-box-sizing: $value;
+  -webkit-box-sizing: $value;
+          box-sizing: $value;
+}
+
+// requires sass 3.2
+//@mixin keyframes {
+//     @-moz-keyframes { @content; }
+//      @-ms-keyframes { @content; }
+//       @-o-keyframes { @content; }
+//  @-webkit-keyframes { @content; }
+//          @keyframes { @content; }
+//}
+
+@mixin linear-gradient($from, $to, $ie: $useIEFilters) {
+  @if $ie != 1 { background-color: $to; }
+  
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
+  background-image: -webkit-linear-gradient(top, $from, $to);
+  background-image: -moz-linear-gradient(top, $from, $to);
+  background-image: -ms-linear-gradient(top, $from, $to);
+  background-image: -o-linear-gradient(top, $from, $to);
+  background-image: linear-gradient(top, bottom, $from, $to);
+
+  @if $ie == 1 { 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+  }
+}
+
+@mixin vertical-three-colors($startColor, $midColor, $endColor, $colorStop)  {
+  background-color: mix($midColor, $endColor, 80%);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($startColor), color-stop($colorStop, $midColor), to($endColor));
+  background-image: -webkit-linear-gradient($startColor, $midColor $colorStop, $endColor);
+  background-image: -moz-linear-gradient(top, $startColor, $midColor $colorStop, $endColor);
+  background-image: -ms-linear-gradient($startColor, $midColor $colorStop, $endColor);
+  background-image: -o-linear-gradient($startColor, $midColor $colorStop, $endColor);
+  background-image: linear-gradient($startColor, $midColor $colorStop, $endColor);
+  background-repeat: no-repeat;
+}
+
+@mixin radial-gradient($color1, $color2, $color3, $stop1, $stop2, $stop3) {
+
+  background-image: -moz-radial-gradient(center, ellipse cover,  $color1 $stop1, $color2 $stop2, $color3 $stop3); /* FF3.6+ */
+  background-image: -webkit-gradient(radial, center center, 0px, center center, $stop3, color-stop($stop1,$color1), color-stop($stop2,$color2), color-stop($stop3,$color3)); /* Chrome,Safari4+ */
+  background-image: -webkit-radial-gradient(center, ellipse cover,  $color1 $stop1,$color2 $stop2,$color3 $stop3); /* Chrome10+,Safari5.1+ */
+  background-image: -o-radial-gradient(center, ellipse cover,  $color1 $stop1,$color2 $stop2,$color3 $stop3); /* Opera 12+ */
+  background-image: -ms-radial-gradient(center, ellipse cover,  $color1 $stop1,$color2 $stop2,$color3 $stop3); /* IE10+ */
+  background-image: radial-gradient(ellipse at center,  $color1 $stop1,$color2 $stop2,$color3 $stop3); /* W3C */
+}
+
+@mixin rgba-bg ($hex, $alpha, $ie: $useIEFilters) {     
+  @if $ie == 1 { 
+    background-color: none;
+    $hexopac: ie-hex-str(rgba($hex, $alpha));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$hexopac}',EndColorStr='#{$hexopac}}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$hexopac}',EndColorStr='#{$hexopac}'));
+  }
+  @else {
+    background-color: $hex;
+    background-color: rgba($hex, $alpha);
+  }
+}
+
+@mixin perspective($perspective) {
+     -moz-perspective: $perspective;
+      -ms-perspective: $perspective;
+  -webkit-perspective: $perspective;
+          perspective: $perspective;
+     -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+@mixin transform ($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+    @mixin matrix ($a, $b, $c, $d, $e, $f) {
+    	   -moz-transform: matrix($a, $b, $c, $d, #{$e}px, #{$f}px);
+    	     -o-transform: matrix($a, $b, $c, $d, $e, $f);
+    	    -ms-transform: matrix($a, $b, $c, $d, $e, $f);
+    	-webkit-transform: matrix($a, $b, $c, $d, $e, $f);
+              transform: matrix($a, $b, $c, $d, $e, $f);
+    }
+
+    @mixin rotate ($deg) {
+      @include transform(rotate(#{$deg}deg));
+    }
+
+    @mixin scale ($size) {
+      @include transform(scale(#{$size}));
+    }
+
+    @mixin translate ($x, $y) {
+    	@include transform(translate($x, $y));
+    }
+
+@mixin transition ($value) {
+     -moz-transition: $value;
+       -o-transition: $value;
+      -ms-transition: $value;
+  -webkit-transition: $value;
+          transition: $value;
+}
+
+// ==== /CSS3 SASS MIXINS ====
+
