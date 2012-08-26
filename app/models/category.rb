@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: banks
+# Table name: categories
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -8,9 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-class Bank < ActiveRecord::Base
+class Category < ActiveRecord::Base
   attr_accessible :name
-  has_many :transactions
 
   validates :name, :presence => true
 end
