@@ -19,6 +19,7 @@
 class Transaction < ActiveRecord::Base
   attr_accessible :check_number, :credit, :date, :debit, :description, :sha1_digest, :bank_id, :trans_date, :trans_type
   belongs_to :bank
+  has_one :meta
 
   validates :date, :presence => true
   validates :description, :presence => true
