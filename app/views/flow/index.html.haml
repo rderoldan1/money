@@ -1,0 +1,9 @@
+%h1 Financial Transaction
+
+%table
+  - @transactions.each do |t|
+    %tr
+      %td= t.date.strftime('%Y-%m-%d')
+      %td= t.date.strftime('%a')
+      %td= t.check_number
+      %td= t.description.downcase

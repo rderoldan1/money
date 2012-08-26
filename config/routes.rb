@@ -1,7 +1,15 @@
 Money::Application.routes.draw do
+
+  get  "flow/"       => 'flow#index'
+  post "flow/"       => 'flow#update'
+  get  "flow/edit"   => 'flow#edit'
+  post "flow/edit"   => 'flow#update'
+  get  "flow/:month" => 'flow#month'
+  post "flow/:month" => 'flow#update'
+
   resources :banks
 
-  get "csv/import" => 'csv#upload'
+  get  "csv/import" => 'csv#upload'
   post "csv/import" => 'csv#import'
 
   resources :transactions

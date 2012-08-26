@@ -1,0 +1,13 @@
+// Place all the styles related to the flow controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.money {
+  color:rgb(62, 146, 62);
+  text-align:right;
+
+  &.negative {
+    color:rgb(180, 24, 24);
+  }
+
+}

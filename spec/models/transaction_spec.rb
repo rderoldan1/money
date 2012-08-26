@@ -2,18 +2,19 @@
 #
 # Table name: transactions
 #
-#  id           :integer          not null, primary key
-#  date         :datetime
-#  check_number :string(255)
-#  description  :string(255)
-#  debit        :float
-#  credit       :float
-#  sha1_digest  :string(255)
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  bank_id      :integer
-#  trans_date   :datetime
-#  trans_type   :string(255)
+#  id                :integer          not null, primary key
+#  date              :datetime
+#  check_number      :string(255)
+#  description       :string(255)
+#  description_clean :string(255)
+#  debit             :float
+#  credit            :float
+#  sha1_digest       :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  bank_id           :integer
+#  trans_date        :datetime
+#  trans_type        :string(255)
 #
 
 require 'spec_helper'
