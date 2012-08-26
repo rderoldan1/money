@@ -1,5 +1,6 @@
 = form_for 'upload' do |f|
 
+  = collection_select :transaction, :bank, Bank.all, :id, :name
   .field
     = f.label :csv, "Upload CSV"
     = f.file_field :csv

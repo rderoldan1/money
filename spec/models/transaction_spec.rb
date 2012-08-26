@@ -11,6 +11,9 @@
 #  sha1_digest  :string(255)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  bank_id      :integer
+#  trans_date   :datetime
+#  trans_type   :string(255)
 #
 
 require 'spec_helper'

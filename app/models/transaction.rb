@@ -11,10 +11,13 @@
 #  sha1_digest  :string(255)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  bank_id      :integer
+#  trans_date   :datetime
+#  trans_type   :string(255)
 #
 
 class Transaction < ActiveRecord::Base
-  attr_accessible :check_number, :credit, :date, :debit, :description, :sha1_digest
+  attr_accessible :check_number, :credit, :date, :debit, :description, :sha1_digest, :bank_id, :trans_date, :trans_type
   belongs_to :bank
 
   validates :date, :presence => true

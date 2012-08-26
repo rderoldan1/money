@@ -11,5 +11,22 @@
 require 'spec_helper'
 
 describe Bank do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  before do
+    @b = Bank.new( name: 'Something' )
+  end
+
+  subject { @b }
+
+  it { should respond_to(:name) }
+
+  describe "Invalid name" do
+
+    it "is empty" do
+      @b.name = ''
+      @b.should_not be_valid
+    end
+
+  end
+
 end
