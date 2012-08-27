@@ -1,6 +1,10 @@
-%h1 Tithe
+%h1 Tithe 
 
-%table
+%table#tithe
+  %tr
+    %td.title Giving
+    %td
+    %td.date= @date
   -@giving.each do |g|
     %tr
       %td= g.meta.descriptor
@@ -16,6 +20,10 @@
       %td
       %td
       %td
+  %tr
+    %td.title Income
+    %td
+    %td
   -@income.each do |i|
     %tr
       %td= i.meta.descriptor
@@ -26,7 +34,11 @@
       %td
       %td
       %td= number_to_currency @income_total
+  %tr.blank
+    %td
+    %td
+    %td
   %tr
-    %td Total
+    %td.title Total
     %td 
     %td= number_to_currency @tithe
