@@ -9,8 +9,11 @@ $.money =
         $(sel).each (i, el) -> 
           $td = $(el)
 
-          if !!$td.text().match(/^(-|)\$/) 
-            $td.addClass('money')
+          if !!$td.text().match(/^[0-9\-\$\.,]+$/) 
+            $td.addClass('number')
+
+          if !!$td.text().match(/^-?\$/) 
+            $td.addClass('positive')
 
           if !!$td.text().match(/^-\$/) 
             $td.text( $td.text().replace(/^-/, '') )
