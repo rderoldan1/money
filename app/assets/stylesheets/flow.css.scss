@@ -2,9 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.money {
-  color:rgb(62, 146, 62);
+.number {
   text-align:right;
+
+  &.positive {
+    color:rgb(62, 146, 62);
+  }
 
   &.negative {
     color:rgb(180, 24, 24);
