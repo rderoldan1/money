@@ -9,12 +9,13 @@ Money::Application.routes.draw do
 
   get  "tithe/:month" => 'tithe#month'
 
-  resources :banks
+  get  "cash/:month" => 'cash_flow#month'
 
   get  "csv/import" => 'csv#upload'
   post "csv/import" => 'csv#import'
 
   resources :transactions
+  resources :banks
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

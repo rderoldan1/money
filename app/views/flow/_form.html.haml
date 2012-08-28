@@ -11,7 +11,7 @@
       %th Note
     %tbody
       - @transactions.each do |t|
-        %tr
+        %tr{class:t.meta.nil? && 'set-descriptor'}
           %td= t.date.strftime('%Y-%m-%d')
           %td= t.date.strftime('%a')
           %td= t.description.downcase

@@ -49,6 +49,43 @@ class Transaction < ActiveRecord::Base
 
   end
 
+  def self.amounts( opt = {} )
+
+    opt.reverse_merge!({
+      :type    => 'credit'       , 
+      :like    => []             , 
+      :unlike  => []             , 
+      :month   => Time.now.month , 
+      :bank => Bank.first.id
+    })
+
+    month = Date.strptime( opt[:month].to_s, "%m" )
+
+    like = [] 
+    opt[:like].each { |d| like << "lower(meta.descriptor) like '%#{d}%'" }
+    like = like.join " or "
+
+    unlike = [] 
+    opt[:unlike].each { |d| unlike << "lower(meta.descriptor) like '%#{d}%'" }
+    unlike = unlike.join " or "
+
+    where = "
+          #{opt[:type]} is not null
+      and transactions.date between ? and ?
+    "
+
+    if !like.empty?
+      where += "and ( #{like} )"
+    end
+
+    if !unlike.empty?
+      where += "and not ( #{unlike} )"
+    end
+
+    Transaction.where(:bank_id => opt[:bank]).joins(:meta).where(where, month.strftime("%Y-%m-%d"), month.end_of_month.strftime("%Y-%m-%d")).group("meta.descriptor").order("transactions.#{opt[:type]} DESC").sum("transactions.#{opt[:type]}")
+
+  end 
+
   private
     def clean
       self.description_clean = self.description.gsub(/[^A-z ]/, '')

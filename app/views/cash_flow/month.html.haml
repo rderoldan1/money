@@ -1,0 +1,65 @@
+%h1 Cash Flow
+
+%table#cashFlow
+  %tr
+    %td.title Income
+    %td
+    %td
+    %td.date= @date
+  -if @income
+    -@income.each do |i|
+      %tr
+        %td= i[0]
+        %td
+        %td= number_with_precision i[1].to_f, :precision => 0, :delimiter => ','
+        %td
+  -if @income_sum
+    %tr.blank
+      %td 
+      %td
+      %td
+      %td
+    %tr
+      %td Total
+      %td
+      %td
+      %td= number_to_currency @income_sum, :precision => 0
+  %tr.blank
+    %td 
+    %td
+    %td
+    %td
+  %tr
+    %td.title Expense
+    %td
+    %td
+    %td
+  -if @expense
+    -@expense.each do |e|
+      %tr
+        %td= e[0]
+        %td
+        %td= number_with_precision e[1].to_f, :precision => 0, :delimiter => ','
+        %td
+  -if @expense_sum
+    %tr.blank
+      %td 
+      %td
+      %td
+      %td
+    %tr
+      %td.title Total
+      %td
+      %td
+      %td= number_to_currency @expense_sum, :precision => 0
+  %tr.blank
+    %td 
+    %td
+    %td
+    %td
+  %tr
+    %td.title Net Cash Flow
+    %td
+    %td
+    %td= number_to_currency @net, :precision => 0
+

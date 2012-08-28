@@ -72,6 +72,17 @@ table {
 
   }
 
+  .title {
+    font-weight:bold;
+    font-size:1.2em;
+  }
+
+  .date {
+    text-align:right;
+    font-size:1.5em;
+    width:40%;
+  }
+
 }
 
 input[type="submit"] {
@@ -84,5 +95,4 @@ input[type="submit"] {
   font-size:15px;
   margin:2em 0;
 }
-
 
