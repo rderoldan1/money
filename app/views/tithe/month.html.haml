@@ -8,13 +8,13 @@
   -@giving.each do |g|
     %tr
       %td= g[0]
-      %td= number_to_currency g[1]
+      %td= number_to_currency g[1], :precision => 0
       %td
   -if @giving_total
     %tr
       %td
       %td
-      %td= number_to_currency @giving_total
+      %td= number_to_currency @giving_total, :precision => 0
   -if @giving
     %tr.blank
       %td
@@ -27,13 +27,13 @@
   -@income.each do |i|
     %tr
       %td= i[0]
-      %td= number_to_currency i[1]
+      %td= number_to_currency i[1], :precision => 0
       %td
   -if @income 
     %tr
       %td
       %td
-      %td= number_to_currency @income_total
+      %td= number_to_currency @income_total, :precision => 0
   %tr.blank
     %td
     %td
@@ -41,4 +41,4 @@
   %tr
     %td.title Total
     %td 
-    %td= number_to_currency @tithe
+    %td= number_to_currency @tithe, :precision => 0
