@@ -7,6 +7,7 @@ Money::Application.routes.draw do
   get  "flow/:month" => 'flow#month'
   post "flow/:month" => 'flow#update'
 
+  get  "tithe/"       => 'tithe#index'
   get  "tithe/:month" => 'tithe#month'
 
   get  "cash/:month" => 'cash_flow#month'

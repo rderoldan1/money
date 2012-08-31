@@ -15,3 +15,20 @@
   }
 
 }
+
+#tithes {
+  
+  td {
+    width:25%;
+  }
+
+  th {
+    text-align:right;
+
+    &:first-child {
+      text-align:left;
+    }
+
+  }
+
+}

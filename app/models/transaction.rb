@@ -51,6 +51,8 @@ class Transaction < ActiveRecord::Base
 
   def self.amounts( opt = {} )
 
+    require 'date'
+
     opt.reverse_merge!({
       :type    => 'credit'       , 
       :like    => []             , 
@@ -85,6 +87,39 @@ class Transaction < ActiveRecord::Base
     Transaction.where(:bank_id => opt[:bank]).joins(:meta).where(where, month.strftime("%Y-%m-%d"), month.end_of_month.strftime("%Y-%m-%d")).group("meta.descriptor").order("transactions.#{opt[:type]} DESC").sum("transactions.#{opt[:type]}")
 
   end 
+
+  def self.giving( month )
+    self.amounts :month => month, :type => 'debit', :bank => 1, :like => %w"support mission tithe"
+  end
+
+  def self.income( month)
+    Transaction.amounts :month => month, :type => 'credit', :bank => 1, :like => %w"ve ssm" + ['new constructs']
+  end
+
+  def self.giving_total( month )
+    giving = self.giving( month )
+    giving_total = 0
+    if ! giving.nil?
+      giving.each {|k, v| giving_total += v }
+    end
+    giving_total
+  end
+
+  def self.income_total( month )
+    income = self.income( month )
+    income_total = 0
+    if ! income.nil?
+      income.each {|k, v| income_total += v }
+    end
+    income_total
+  end
+
+  def self.tithe( month )
+    giving_total = self.giving_total( month )
+    income_total = self.income_total( month )
+
+    income_total * 0.1 - giving_total
+  end
 
   private
     def clean
