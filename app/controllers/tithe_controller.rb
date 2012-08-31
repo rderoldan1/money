@@ -1,34 +1,27 @@
 class TitheController < ApplicationController
 
+  def index
+  end
+
   def month
     require 'date'
 
     month = Date.strptime( params[:month], "%m" )
 
-    where = "
-          debit is not null
-      and transactions.date between ? and ?
-      and (
-            lower(meta.descriptor) like '%support%'
-        or  lower(meta.descriptor) like '%mission%'
-        or  lower(meta.descriptor) like '%tithe%'
-      )
-    "
+    @giving = Transaction.amounts :month => params[:month], :type => 'debit', :bank => 1, :like => %w"support mission tithe"
 
-    @giving = Bank.find(1).transactions.joins(:meta).where(where, month.strftime("%Y-%m-%d"), month.end_of_month.strftime("%Y-%m-%d"))
-    @giving_total = @giving.sum(:debit)
+    @giving_total = 0
+    if ! @giving.nil?
+      @giving.each {|k, v| @giving_total += v }
+    end
 
-    where = "
-          credit is not null
-      and transactions.date between ? and ?
-      and (
-            lower(meta.descriptor) like '%VE%'
-        or  lower(meta.descriptor) like '%SSM%'
-      )
-    "
+    @income = Transaction.amounts :month => params[:month], :type => 'credit', :bank => 1, :like => %w"ve ssm" + ['new constructs']
 
-    @income = Bank.find(1).transactions.joins(:meta).where(where, month.strftime("%Y-%m-%d"), month.end_of_month.strftime("%Y-%m-%d"))
-    @income_total = @income.sum(:credit)
+    @income_total = 0
+    if ! @income.nil?
+      @income.each {|k, v| @income_total += v }
+    end
+
 
     @tithe = @income_total * 0.1 - @giving_total
     @date = month.strftime("%B %Y")

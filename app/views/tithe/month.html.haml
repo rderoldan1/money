@@ -7,8 +7,8 @@
     %td.date= @date
   -@giving.each do |g|
     %tr
-      %td= g.meta.descriptor
-      %td= number_to_currency g.amount
+      %td= g[0]
+      %td= number_to_currency g[1]
       %td
   -if @giving_total
     %tr
@@ -26,8 +26,8 @@
     %td
   -@income.each do |i|
     %tr
-      %td= i.meta.descriptor
-      %td= number_to_currency i.amount
+      %td= i[0]
+      %td= number_to_currency i[1]
       %td
   -if @income 
     %tr
