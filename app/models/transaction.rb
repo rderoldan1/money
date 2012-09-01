@@ -57,11 +57,34 @@ class Transaction < ActiveRecord::Base
       :type    => 'credit'       , 
       :like    => []             , 
       :unlike  => []             , 
-      :month   => Time.now.month , 
       :bank    => Bank.first.id
     })
 
-    month = Date.strptime( opt[:month].to_s, "%m" )
+    m = opt[:month].to_s
+    date_format = nil
+
+    valid_dates = {
+      /^[0-9]{4}\-[0-9]{1,2}$/ => '%Y-%m' ,
+      /^[0-9]{4}$/             => '%Y' ,
+      /^[0-9]{1,2}$/           => '%m' ,
+    }
+
+    valid_dates.each do |r, f| 
+      if r =~ m && true 
+        date_format = f
+        break
+      end
+    end
+
+    month = date_format.nil? || ( m.to_i > 12 && m.to_i < 1000 ) ? Time.now : Date.strptime( m, date_format )
+
+    beginning = month.strftime('%Y-%m-%d')
+    ending    = month.end_of_month.strftime("%Y-%m-%d")
+
+    if m == '-1'
+      beginning = '1950-01-01'
+      ending    = Date.today.end_of_month.strftime("%Y-%m-%d")
+    end
 
     like = [] 
     opt[:like].each { |d| like << "lower(meta.descriptor) like '%#{d}%'" }
@@ -73,7 +96,7 @@ class Transaction < ActiveRecord::Base
 
     where = "
           #{opt[:type]} is not null
-      and transactions.date between #{month.strftime("%Y-%m-%d")} and #{month.end_of_month.strftime("%Y-%m-%d")}
+      and transactions.date between \"#{beginning}\" and \"#{ending}\"
     "
 
     if !like.empty?

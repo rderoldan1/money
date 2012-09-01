@@ -13,3 +13,8 @@
         %td= number_to_currency t[:income], :precision => 0
         %td= number_to_currency t[:giving], :precision => 0
         %td= number_to_currency t[:tithe], :precision => 0
+    %tr
+      %td.title Total
+      %td.title= number_to_currency @total[:income], :precision => 0
+      %td.title= number_to_currency @total[:giving], :precision => 0
+      %td.title= number_to_currency @total[:tithe], :precision => 0

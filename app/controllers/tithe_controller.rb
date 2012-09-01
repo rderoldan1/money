@@ -5,6 +5,7 @@ class TitheController < ApplicationController
     first = Transaction.minimum('date')
     dates = (first.to_date.beginning_of_month..Date.today.end_of_month).map{|m| m.strftime('%Y-%m')}.uniq.reverse
     @tithes = []
+    @total  = {}
 
     dates.each do |month|
       tithe = {}
@@ -20,6 +21,10 @@ class TitheController < ApplicationController
       @tithes << tithe
 
     end
+
+    @total[:giving] = Transaction.giving_total "-1"
+    @total[:income] = Transaction.income_total("-1") * 0.1
+    @total[:tithe]  = Transaction.tithe "-1"
     
   end
 
