@@ -58,7 +58,7 @@ class Transaction < ActiveRecord::Base
       :like    => []             , 
       :unlike  => []             , 
       :month   => Time.now.month , 
-      :bank => Bank.first.id
+      :bank    => Bank.first.id
     })
 
     month = Date.strptime( opt[:month].to_s, "%m" )
@@ -73,7 +73,7 @@ class Transaction < ActiveRecord::Base
 
     where = "
           #{opt[:type]} is not null
-      and transactions.date between ? and ?
+      and transactions.date between #{month.strftime("%Y-%m-%d")} and #{month.end_of_month.strftime("%Y-%m-%d")}
     "
 
     if !like.empty?
@@ -84,7 +84,7 @@ class Transaction < ActiveRecord::Base
       where += "and not ( #{unlike} )"
     end
 
-    Transaction.where(:bank_id => opt[:bank]).joins(:meta).where(where, month.strftime("%Y-%m-%d"), month.end_of_month.strftime("%Y-%m-%d")).group("meta.descriptor").order("transactions.#{opt[:type]} DESC").sum("transactions.#{opt[:type]}")
+    Transaction.where(:bank_id => opt[:bank]).joins(:meta).where(where).group("meta.descriptor").order("transactions.#{opt[:type]} DESC").sum("transactions.#{opt[:type]}")
 
   end 
 
@@ -118,7 +118,7 @@ class Transaction < ActiveRecord::Base
     giving_total = self.giving_total( month )
     income_total = self.income_total( month )
 
-    income_total * 0.1 - giving_total
+    -income_total * 0.1 + giving_total
   end
 
   private
