@@ -32,7 +32,7 @@ class FlowController < ApplicationController
 
     end
 
-    redirect_to flow_edit_path
+    #redirect_to flow_edit_path
 
   end
 

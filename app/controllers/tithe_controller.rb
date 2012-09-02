@@ -9,11 +9,8 @@ class TitheController < ApplicationController
 
     dates.each do |month|
       tithe = {}
-      month = Date.strptime( month, '%Y-%m' )
-                  .strftime("%m")
-                  .to_s
       tithe[:month]  = month
-      tithe[:date]   = Date.strptime( month, '%m' ).strftime('%Y %B')
+      tithe[:date]   = Date.strptime( month, '%Y-%m' ).strftime('%Y %B')
       tithe[:giving] = Transaction.giving_total month
       tithe[:income] = Transaction.income_total(month) * 0.1
       tithe[:tithe]  = Transaction.tithe month

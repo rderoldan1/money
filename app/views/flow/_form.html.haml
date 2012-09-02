@@ -8,6 +8,7 @@
       %th 
       %th 
       %th Description
+      %th Company
       %th Note
     %tbody
       - @transactions.each do |t|
@@ -18,6 +19,8 @@
           %td= number_to_currency t.amount
           %td
             %input{ type: 'text', name: 'transactions[transaction-' + t.id.to_s + '][descriptor]', value: t.suggest }
+          %td
+            %input{ type: 'text', name: 'transactions[transaction-' + t.id.to_s + '][company]', value: t.company_suggest }
           %td
             %textarea{ name: 'transactions[transaction-' + t.id.to_s + '][note]'}= t.meta.nil? ? '' : t.meta.note 
     
