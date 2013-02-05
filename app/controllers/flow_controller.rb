@@ -24,7 +24,7 @@ class FlowController < ApplicationController
   end
 
   def edit
-    @transactions = Transaction.order("date DESC")
+    @transactions = Transaction.where(:date => 2.months.ago..Time.now).order("date DESC")
   end
 
 end
