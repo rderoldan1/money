@@ -11,7 +11,7 @@
 #
 
 class Meta < ActiveRecord::Base
-  attr_accessible :descriptor, :transaction, :note
+  attr_accessible :descriptor, :transaction, :note, :company
   belongs_to :transaction
 
   validates :descriptor, :presence => true

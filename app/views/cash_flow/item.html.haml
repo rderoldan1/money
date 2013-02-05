@@ -1,0 +1,20 @@
+%h1 Cash Flow
+
+= form_for :meta do |f|
+  %table#cashFlow
+    -@items.each do |i|
+      %tr
+        %td= i.date
+        %td= i.description_clean
+        %td= number_to_currency i.amount, :precision => 0
+        %td
+          %input{ type: 'text', name: 'transactions[transaction-' + i.id.to_s + '][descriptor]', value: i.meta.descriptor }
+        %td
+          %textarea{ name: 'transactions[transaction-' + i.id.to_s + '][note]'}= i.meta.note
+    %tr
+      %td
+      %td
+      %td= number_to_currency @items_sum, :precision => 0
+      %td
+      %td
+  =f.submit

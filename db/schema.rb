@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826063911) do
+ActiveRecord::Schema.define(:version => 20120901193206) do
 
   create_table "banks", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20120826063911) do
   create_table "meta", :force => true do |t|
     t.string   "descriptor"
     t.integer  "transaction_id"
+    t.string   "company"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.text     "note"

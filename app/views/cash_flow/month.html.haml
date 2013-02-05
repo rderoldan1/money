@@ -37,7 +37,7 @@
   -if @expense
     -@expense.each do |e|
       %tr
-        %td= e[0]
+        %td= link_to e[0], "/cash/#{@month}/#{e[0]}"
         %td
         %td= number_with_precision e[1].to_f, :precision => 0, :delimiter => ','
         %td

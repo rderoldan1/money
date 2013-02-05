@@ -1,0 +1,20 @@
+%h1 Tithe 
+
+%table#tithes
+  %thead
+    %th Date
+    %th 10% of Income
+    %th Giving
+    %th Tithe
+  %tbody
+    -@tithes.each do |t|
+      %tr
+        %td= link_to t[:date], "/tithe/#{t[:month]}"
+        %td= number_to_currency t[:income], :precision => 0
+        %td= number_to_currency t[:giving], :precision => 0
+        %td= number_to_currency t[:tithe], :precision => 0
+    %tr
+      %td.title Total
+      %td.title= number_to_currency @total[:income], :precision => 0
+      %td.title= number_to_currency @total[:giving], :precision => 0
+      %td.title= number_to_currency @total[:tithe], :precision => 0

@@ -1,0 +1,12 @@
+#nav {
+    text-align:right;
+    float:right;
+    a {
+        display:inline-block;
+        padding:0 1em;
+
+        &:last-child {
+            padding-right:0;
+        }
+    }
+}

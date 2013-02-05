@@ -8,8 +8,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <div id="nav">
+    <%= link_to "Overview", "/" %>
+    <%= link_to "Tithe", "/tithe" %>
+    <%= link_to "Transactions", "/flow/edit" %>
+    <%= link_to "Import", "/csv/import" %>
+  </div>
+
+  <div id="main">
 
 <%= yield %>
 
+  </div>
 </body>
 </html>

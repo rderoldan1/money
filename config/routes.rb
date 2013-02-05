@@ -1,5 +1,6 @@
 Money::Application.routes.draw do
 
+  get  "/"           => 'cash_flow#index'
   get  "flow/"       => 'flow#index'
   post "flow/"       => 'flow#update'
   get  "flow/edit"   => 'flow#edit'
@@ -7,9 +8,13 @@ Money::Application.routes.draw do
   get  "flow/:month" => 'flow#month'
   post "flow/:month" => 'flow#update'
 
+  get  "tithe/"       => 'tithe#index'
   get  "tithe/:month" => 'tithe#month'
 
+  get  "cash/"       => 'cash_flow#index'
   get  "cash/:month" => 'cash_flow#month'
+  get  "cash/:month/:item" => 'cash_flow#item'
+  post "cash/:month/:item" => 'flow#update'
 
   get  "csv/import" => 'csv#upload'
   post "csv/import" => 'csv#import'

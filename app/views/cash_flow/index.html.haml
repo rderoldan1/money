@@ -1,0 +1,20 @@
+%h1 Tithe 
+
+%table#cash_flow
+  %thead
+    %th Date
+    %th Income
+    %th Expense
+    %th Net
+  %tbody
+    -@transactions.each do |t|
+      %tr
+        %td= link_to t[:date], "/cash/#{t[:month]}"
+        %td= number_to_currency t[:income], :precision => 0
+        %td= number_to_currency t[:expense], :precision => 0
+        %td= number_to_currency t[:net], :precision => 0
+    %tr
+      %td.title Total
+      %td.title= number_to_currency @total[:income], :precision => 0
+      %td.title= number_to_currency @total[:expense], :precision => 0
+      %td.title= number_to_currency @total[:net], :precision => 0

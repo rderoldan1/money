@@ -1,8 +1,23 @@
 $openSans: 'Open Sans', arial;
+
+$link : rgb(230, 140, 100);
+
 body {
   font:normal 16px/1.5 $openSans;
   width:90%;
   margin:0 auto;
+  padding:1em 0 10em;
+}
+
+a ,
+a::visted {
+  text-decoration:none;
+  color: $link ;
+
+  &:hover {
+    color:darken($link, 20%);
+  }
+
 }
 
 h1 {
