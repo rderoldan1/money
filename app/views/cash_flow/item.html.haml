@@ -4,7 +4,7 @@
   %table#cashFlow
     -@items.each do |i|
       %tr
-        %td= i.date
+        %td= i.date.strftime("%B %d, %Y")
         %td= i.description_clean
         %td= number_to_currency i.amount, :precision => 0
         %td
