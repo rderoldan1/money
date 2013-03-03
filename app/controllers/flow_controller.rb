@@ -24,7 +24,8 @@ class FlowController < ApplicationController
   end
 
   def edit
-    @transactions = Transaction.where(:date => 2.months.ago..Time.now).order("date DESC")
+    show = params[:show] ? params[:show].to_i : 2 
+    @transactions = Transaction.where(:date => show.months.ago..Time.now).order("date DESC")
   end
 
 end
